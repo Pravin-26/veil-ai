@@ -2,17 +2,19 @@
 
 > **Let your AI break the ice.**
 
-Veil is an AI-assisted dating experience that explores potential compatibility before two people decide whether they want to meet.
+Veil is an AI-assisted dating experience that helps people explore potential compatibility before deciding whether they want to meet in person.
 
-Instead of immediately connecting two matched users, Veil creates profile-based AI personas from the preferences they choose to share. The personas can participate in a simulated virtual first date, after which users receive a compatibility exploration report.
+Instead of immediately connecting two matched users, Veil creates profile-based AI personas from the preferences users choose to share. Their Veils can participate in a simulated virtual first date, after which users receive an exploratory compatibility report and a Requirement Match Signal.
 
-The goal is simple: **help people decide whether a conversation might be worth having before they meet in real life.**
+The goal is simple:
+
+**Help people decide whether a conversation may be worth having before they meet in real life.**
 
 ---
 
-## 💜 The Idea
+## The Idea
 
-Traditional dating apps primarily match people using profiles, photos, and preferences.
+Traditional dating apps primarily match people using photos, profiles, and preferences.
 
 Veil introduces another layer:
 
@@ -29,115 +31,226 @@ Users complete a questionnaire covering:
 - Ideal dates
 - Favorite conversation topics
 
-Veil uses this information to build a profile-based AI persona.
+Veil uses this information to create a profile-based persona and compare users through an explainable matching algorithm.
 
-When two people match, their Veil personas can participate in a simulated virtual date. Afterward, users receive a report highlighting potential areas of alignment, differences worth exploring, and useful conversation starters.
+When two people match, their Veil personas can participate in a simulated virtual date.
+
+Afterward, the users receive a report highlighting:
+
+- Shared interests
+- Areas of alignment
+- Differences worth exploring
+- Conversation starters
+- Topics worth discussing on a real first date
 
 The humans always make the final decision.
 
 ---
 
-## ✨ How Veil Works
+## How Veil Works
 
 ### 1. Create Your Veil
 
-Complete an interactive questionnaire about your personality, preferences, values, interests, and relationship goals.
+The user completes an interactive dating questionnaire about their personality, preferences, values, lifestyle, and relationship goals.
 
-### 2. Discover a Match
+### 2. Generate a Profile-Based Persona
 
-Veil presents a potential match based on the preferences provided.
+Veil can use the OpenAI API to transform questionnaire responses into a structured AI persona.
 
-### 3. Schedule a Virtual Date
+The persona is designed to:
 
-The two Veil personas participate in a simulated first-date conversation based on information the users have chosen to share.
+- Represent only user-provided information
+- Avoid inventing personal history
+- Avoid making romantic decisions for the user
+- Clearly remain a simulation rather than pretending to be the actual person
 
-### 4. Receive a Virtual Date Report
+A built-in Demo Persona is available when live API generation is unavailable.
 
-After the virtual date, Veil presents:
+### 3. Discover a Match
 
-- Shared interests
+Veil compares two profiles using an explainable weighted matching algorithm.
+
+### 4. Schedule a Virtual Date
+
+Two Veil personas participate in a simulated first-date conversation based on the information both users chose to provide.
+
+### 5. Receive a Virtual Date Report
+
+After the conversation, Veil presents:
+
 - Areas of alignment
 - Differences worth discussing
 - Conversation starters
-- Topics worth exploring on a real date
+- Topics worth exploring in person
 
-### 5. View Your Requirement Match Signal
+### 6. View the Requirement Match Signal
 
-Veil provides an exploratory match signal based on stated preferences and requirements.
+Veil calculates an exploratory percentage using user-stated preferences.
 
-The signal is not a scientific compatibility score and does not predict relationship success or real-world chemistry.
+This is not a scientific compatibility prediction.
 
-### 6. Lift the Veil
+### 7. Lift the Veil
 
-After reviewing the report, each person can decide whether they are interested in meeting the person behind the Veil.
+After reviewing the report, the user decides whether they want to meet the person behind the Veil.
 
-The product vision is that a connection happens only when both people independently choose to connect.
+The product vision is that identities are revealed only when both people independently choose to connect.
 
 ---
 
-## 🎭 Demo Experience
+## Matching Algorithm
 
-This hackathon prototype includes a complete Demo Mode so the entire Veil experience can be explored without requiring two real users or paid API access.
+Veil uses an **explainable weighted similarity algorithm**.
+
+For multi-select preferences, the application uses **Jaccard similarity**, which measures how much two sets of preferences overlap.
+
+The match signal considers:
+
+- Relationship goals — 30%
+- Personal values — 25%
+- Interests — 15%
+- Lifestyle — 10%
+- Communication style — 10%
+- Ideal date preferences — 10%
+
+Each category produces a similarity score between 0 and 1.
+
+The final score is calculated as a weighted combination of those category scores and converted into a percentage.
+
+The application also shows a category-level breakdown so users can understand why a particular Requirement Match Signal was produced.
+
+The score is designed to be transparent and explainable.
+
+It is **not** a machine-learning prediction and does not claim to predict relationship success.
+
+---
+
+## Requirement Match Signal
+
+The Requirement Match Signal is an exploratory indicator based on the preferences users provide.
+
+For example, Veil may calculate alignment across:
+
+- Relationship goals
+- Values
+- Interests
+- Lifestyle
+- Communication
+- Date preferences
+
+The final percentage represents preference overlap and alignment.
+
+It should not be interpreted as:
+
+- A probability that a relationship will succeed
+- A scientific compatibility score
+- A prediction of real-world chemistry
+
+Real chemistry can only be discovered by the people themselves.
+
+---
+
+## Demo Experience
+
+This hackathon prototype includes a complete Demo Mode so the full Veil experience can be explored without requiring two real users or paid API access.
 
 The demo includes:
 
 - Interactive onboarding
 - Dating questionnaire
-- Profile-based Veil persona
-- Potential match
-- Virtual date scheduling
-- Simulated persona conversation
-- Virtual Date Report notification
+- Profile-based persona
+- Explainable matching algorithm
 - Requirement Match Signal
-- Mutual interest and reveal experience
+- Realistic demo profiles
+- Virtual-date scheduling
+- Simulated avatar conversation
+- Virtual Date Report notification
+- Compatibility exploration report
+- Mutual-interest reveal experience
 
-If live AI generation is unavailable, select:
+If live AI persona generation is unavailable, users can select:
 
 **Continue with Demo Persona**
 
-This allows the complete product experience to remain testable.
+This keeps the complete product experience testable and reliable.
 
 ---
 
-## 🤖 OpenAI Integration
+## AI-Assisted Architecture
 
-Veil includes a server-side OpenAI integration for transforming questionnaire responses into a structured AI persona.
+Veil is designed as an AI-assisted product rather than an automated relationship-decision system.
 
-The integration is designed to:
+The architecture includes:
 
-- Use information supplied by the user
+```text
+Questionnaire
+    ↓
+Profile-Based Persona
+    ↓
+Weighted Similarity Matching
+    ↓
+Requirement Match Signal
+    ↓
+Virtual Date Simulation
+    ↓
+Compatibility Exploration Report
+    ↓
+Human Decision
+```
+
+The OpenAI integration is server-side so API credentials are never exposed to the browser.
+
+The application includes a fallback Demo Mode when live API access is unavailable.
+
+---
+
+## OpenAI Integration
+
+Veil includes server-side OpenAI integration for transforming questionnaire responses into a structured Veil persona.
+
+The integration is designed around several constraints:
+
+- Use user-provided information as the source of truth
 - Avoid inventing personal history
-- Avoid making romantic decisions on behalf of users
-- Keep API credentials on the server
-- Provide a reliable Demo Mode when live generation is unavailable
+- Avoid making commitments for the user
+- Avoid making romantic decisions on behalf of the user
+- Keep API credentials private
+- Provide graceful fallback behavior
 
-The prototype also demonstrates the product architecture for extending this approach to AI-powered virtual date simulations and compatibility exploration reports.
+The prototype architecture can be extended further to support fully generated multi-persona virtual dates and dynamic post-date reports.
 
 ---
 
-## 🧠 How I Used Codex
+## How I Used Codex
 
 Codex was a core development tool throughout the creation of Veil.
 
 I used Codex to help:
 
-- Build the Next.js application architecture
-- Create the multi-step onboarding experience
-- Develop reusable React components
-- Implement the end-to-end demo journey
-- Integrate server-side OpenAI persona generation
-- Implement error handling and fallback behavior
-- Review TypeScript implementation
-- Debug build and lint issues
-- Iterate on the user experience
+- Initialize and structure the Next.js application
+- Build the multi-step onboarding experience
+- Create reusable React components
+- Implement the complete demo journey
+- Build the persona-generation integration
+- Create fallback and error-handling flows
+- Debug TypeScript and build issues
+- Improve the overall user experience
 
-I also directly developed and refined parts of the project, including the virtual-date scheduling experience, match-report flow, Requirement Match Signal, product copy, and overall product direction.
+I also directly worked on and refined:
+
+- The Veil product concept
+- The virtual-date workflow
+- The Requirement Match Signal
+- The weighted matching algorithm
+- Jaccard similarity logic
+- The final mutual-reveal experience
+- Avatar integration
+- Product copy and safety positioning
 
 The development process combined human product decisions with Codex-assisted implementation.
 
 ---
 
-## 🛠 Technology Stack
+## Technology Stack
 
 - Next.js
 - React
@@ -145,16 +258,17 @@ The development process combined human product decisions with Codex-assisted imp
 - Tailwind CSS
 - OpenAI API
 - Codex
+- Node.js
 - Git
 - GitHub
 
 ---
 
-## 🚀 Running Veil Locally
+## Running Veil Locally
 
 ### Prerequisites
 
-Make sure you have Node.js and npm installed.
+Install Node.js and npm.
 
 ### 1. Clone the repository
 
@@ -169,11 +283,7 @@ cd veil-ai
 npm install
 ```
 
-This installs all packages required by the application, including the OpenAI SDK if it is listed in `package.json`.
-
 ### 3. Run in Demo Mode
-
-You can run and explore the complete demo without an OpenAI API key:
 
 ```bash
 npm run dev
@@ -181,83 +291,95 @@ npm run dev
 
 Open:
 
-`http://localhost:3000`
+```text
+http://localhost:3000
+```
 
-Complete the onboarding flow and choose **Continue with Demo Persona** if live AI generation is unavailable.
+The full demo can be explored without a live OpenAI API connection.
 
 ### 4. Optional: Enable Live OpenAI Persona Generation
 
-To test live AI generation, create a file named:
-
-```text
-.env.local
-```
-
-Add:
+Create a `.env.local` file in the project root:
 
 ```env
 OPENAI_API_KEY=your_openai_api_key
 ```
 
-Then restart the development server:
+Then restart:
 
 ```bash
 npm run dev
 ```
 
-An OpenAI API key is **not required to experience the complete Demo Mode**.
-
-Never commit `.env.local` or an API key to the repository.
+Never commit `.env.local` or API credentials to GitHub.
 
 ---
 
-## 🔐 Product Principles
+## Product Principles
 
 ### Human choice comes first
 
-AI should help people explore potential connections, not make romantic decisions for them.
+AI should assist people in exploring potential connections, not make romantic decisions for them.
+
+### Explainability matters
+
+The Requirement Match Signal is calculated using transparent preference-matching logic instead of presenting an unexplained black-box score.
 
 ### AI personas are simulations
 
-A Veil persona represents information a user chooses to provide. It is not the actual person.
+A Veil persona is based on information the user chooses to provide. It is not the actual person.
 
 ### Compatibility is not certainty
 
-The Requirement Match Signal is an exploratory indicator and should not be interpreted as a scientific prediction.
-
-### Real chemistry happens between real people
-
-Veil helps users explore whether a real conversation may be worth having. It cannot determine real-world chemistry.
+The match signal does not predict relationship success or chemistry.
 
 ### Mutual consent matters
 
-The product vision requires both users to independently express interest before a connection is made.
+The product vision requires both users to independently express interest before identities are revealed.
+
+### Real chemistry happens between real people
+
+Veil can break the ice.
+
+The rest is up to the humans.
 
 ---
 
-## 🔮 Future Vision
+## Current Prototype
+
+This project was created as a hackathon prototype focused on demonstrating the core Veil experience.
+
+The current version prioritizes a complete end-to-end product journey over production-scale dating infrastructure.
 
 Future development could include:
 
-- User authentication and persistent profiles
-- Real matchmaking
-- Fully AI-generated multi-persona virtual dates
+- User authentication
+- Persistent user profiles
+- Database-backed matchmaking
+- Fully AI-generated avatar conversations
+- Dynamic AI compatibility reports
 - Background virtual-date scheduling
-- User notifications
+- Notifications
 - Mutual consent workflows
 - Human-to-human messaging
 - Expanded privacy and safety controls
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
-Veil's AI-generated personas, simulated conversations, reports, and match signals are exploratory tools based on user-provided information.
+Veil's AI-generated personas, simulated conversations, reports, and Requirement Match Signals are exploratory tools based on user-provided information.
 
-They do not predict real-world compatibility, relationship success, personal safety, or chemistry.
+They do not predict:
+
+- Real-world compatibility
+- Relationship success
+- Personal safety
+- Attraction
+- Chemistry
 
 ---
 
-## 💜 Veil
+## Veil
 
-**The Veil can break the ice. The rest is up to you.**
+**The Veil can break the ice. The rest is yours.**
