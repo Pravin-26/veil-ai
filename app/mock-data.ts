@@ -1,3 +1,5 @@
+import type { VeilPersona } from "../lib/types/veil";
+
 export type Question = {
   id: string;
   eyebrow: string;
@@ -19,6 +21,18 @@ export const questions: Question[] = [
 ];
 
 export const defaultAnswers = Object.fromEntries(questions.map((question) => [question.id, question.options[0].label]));
+
+export const demoPersona: VeilPersona = {
+  summary: "A profile-based persona representing someone who stated a desire for a lasting partnership, enjoys food, art, and cities, and values kindness.",
+  conversationStyle: "Inferred from the selected communication preference: likely warm and direct in conversation.",
+  interests: ["Food, art & cities"],
+  values: ["Kindness"],
+  relationshipGoals: ["A lasting partnership"],
+  lifestylePreferences: ["Loosely planned weekends", "Usually open to spontaneous plans"],
+  preferredDateStyles: ["A little adventure"],
+  conversationTopics: ["Big ideas"],
+  boundaries: [],
+};
 
 export const dateMessages = [
   ["Mara", "I saw you make a mean mushroom risotto. Is that a comfort-food skill or a dinner-party flex?"],
