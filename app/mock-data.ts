@@ -46,11 +46,10 @@ export const dateMessages = [
 ] as const;
 
 export const match = {
-  name: "Maya",
-  age: 27,
+  name: "Anaya",
+  age: 29,
   city: "New York",
-  avatar: "/avatars/maya.png",
-  interests: ["Travel", "Coffee", "Books"],
+  avatar: "/avatars/anaya.png",
   shared: ["Travel", "Coffee", "Books"],
   dateTime: "Tonight at 8:00 PM",
 };
