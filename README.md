@@ -220,11 +220,11 @@ The prototype architecture can be extended further to support fully generated mu
 
 ---
 
-## How I Used Codex
+## How We Used Codex
 
 Codex was a core development tool throughout the creation of Veil.
 
-I used Codex to help:
+We used Codex to help:
 
 - Initialize and structure the Next.js application
 - Build the multi-step onboarding experience
@@ -235,7 +235,7 @@ I used Codex to help:
 - Debug TypeScript and build issues
 - Improve the overall user experience
 
-I also directly worked on and refined:
+We also directly worked on and refined:
 
 - The Veil product concept
 - The virtual-date workflow
