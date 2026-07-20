@@ -32,8 +32,30 @@ export const dateMessages = [
 ] as const;
 
 export const match = {
-  name: "Mara",
-  age: 29,
-  interests: ["Ceramics", "Long dinners", "Film photography"],
-  shared: ["Small restaurants", "Bookstores", "Thoughtful conversation"],
+  name: "Maya",
+  age: 27,
+  city: "New York",
+  avatar: "/avatars/maya.png",
+  interests: ["Travel", "Coffee", "Books"],
+  shared: ["Travel", "Coffee", "Books"],
+  dateTime: "Tonight at 8:00 PM",
 };
+
+const preferenceMatches: Record<string, string> = {
+  goal: "A lasting partnership",
+  interests: "Food, art & cities",
+  values: "Kindness",
+  date: "A little adventure",
+  communication: "Warm & direct",
+  energy: "A mix of both",
+  lifestyle: "Loosely planned",
+  spontaneity: "Usually yes",
+  partner: "Emotional intelligence",
+  topics: "Big ideas",
+};
+
+/** A transparent mock score: it changes as the stated demo preferences change. */
+export function getRequirementMatchSignal(answers: Record<string, string>) {
+  const matchedPreferences = Object.entries(preferenceMatches).filter(([key, value]) => answers[key] === value).length;
+  return 65 + Math.round((matchedPreferences / Object.keys(preferenceMatches).length) * 19);
+}
