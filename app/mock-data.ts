@@ -35,14 +35,46 @@ export const demoPersona: VeilPersona = {
 };
 
 export const dateMessages = [
-  ["Mara", "I saw you make a mean mushroom risotto. Is that a comfort-food skill or a dinner-party flex?"],
-  ["Your Veil", "Definitely comfort food first, but I won’t deny enjoying the dramatic stirring part."],
-  ["Mara", "Good answer. I’m partial to recipes that make the kitchen smell like you’re somewhere else."],
-  ["Your Veil", "Exactly. I’d take a small restaurant with one perfect dish over somewhere flashy any day."],
-  ["Mara", "That feels like a very strong first-date philosophy. Add a neighborhood walk afterward?"],
-  ["Your Veil", "Yes—especially if there’s an unplanned bookstore or a place for dessert involved."],
-  ["Mara", "I’m hearing equal parts thoughtful and game for a detour. That’s a lovely combination."],
-  ["Your Veil", "And I’m hearing someone who knows a good evening doesn’t need to be overproduced."],
+  [
+    "Anaya",
+    "This feels like exactly the kind of place where a good conversation can happen.",
+  ],
+  [
+    "Your Veil",
+    "Definitely. I like places where the conversation matters more than the noise.",
+  ],
+  [
+    "Anaya",
+    "Same. I usually remember the conversation more than what I actually ordered.",
+  ],
+  [
+    "Your Veil",
+    "That sounds familiar. Though a really good coffee earns bonus points.",
+  ],
+  [
+    "Anaya",
+    "Important question then: are you loyal to one favorite place, or always looking for somewhere new?",
+  ],
+  [
+    "Your Veil",
+    "Usually somewhere new. Especially if there is a bookstore or a neighborhood worth wandering afterward.",
+  ],
+  [
+    "Anaya",
+    "That might be my ideal kind of plan. Something simple with room for an unexpected detour.",
+  ],
+  [
+    "Your Veil",
+    "I like that. Plans that feel easy but still leave room for surprises.",
+  ],
+  [
+    "Anaya",
+    "What is something that instantly makes you feel at home in a city?",
+  ],
+  [
+    "Your Veil",
+    "Good coffee, kind people, and a street that has more stories than it shows at first glance.",
+  ],
 ] as const;
 
 export const match = {
