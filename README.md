@@ -380,6 +380,14 @@ They do not predict:
 
 ---
 
+
+## License
+
+This project was created for competition and demonstration purposes.
+All rights reserved by the project team unless otherwise stated.
+
+
+
 ## Veil
 
 **The Veil can break the ice. The rest is yours.**
