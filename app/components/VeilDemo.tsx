@@ -112,7 +112,110 @@ const requirementSignal = matchResult.score;  return <Shell><Topbar onHome={() =
     {stage === "personaError" && <section className="relative mx-auto flex min-h-[calc(100vh-88px)] max-w-3xl items-center justify-center px-6 pb-16 text-center"><div><Eyebrow>Persona unavailable</Eyebrow><h2 className="mt-4 font-serif text-5xl">We couldn&apos;t create your Veil.</h2><p className="mx-auto mt-5 max-w-md leading-7 text-white/60">{personaError}</p><div className="mt-8 flex flex-wrap justify-center gap-3"><Button secondary onClick={() => { setStep(questions.length - 1); setStage("onboarding"); }}>Review answers</Button><Button onClick={() => { setPersona(demoPersona); setStage("persona"); }}>Continue with Demo Persona <span className="ml-2">→</span></Button></div></div></section>}
     {stage === "persona" && <section className="relative mx-auto grid min-h-[calc(100vh-88px)] max-w-5xl items-center gap-12 px-6 pb-16 md:grid-cols-2"><div><Eyebrow>Your introduction</Eyebrow><h2 className="mt-4 font-serif text-5xl sm:text-6xl">Meet your <em className="font-normal text-violet-300">Veil.</em></h2><p className="mt-6 max-w-md leading-7 text-white/60">Your Veil is a profile-based AI persona. It only represents information you choose to provide.</p><div className="mt-8"><Button onClick={() => setStage("match")}>Find My Match <span className="ml-2">→</span></Button></div></div><div className="rounded-[2rem] border border-violet-200/20 bg-gradient-to-br from-violet-300/20 to-white/[.03] p-7 shadow-2xl"><div className="flex items-start justify-between"><div className="grid size-16 place-items-center rounded-full bg-gradient-to-br from-violet-300 to-fuchsia-300 font-serif text-3xl text-[#1b0c2e]">V</div><span className="rounded-full border border-violet-200/25 px-3 py-1 text-[10px] tracking-widest text-violet-200">PROFILE-BASED</span></div><h3 className="mt-8 font-serif text-3xl">Your Veil</h3><p className="mt-2 text-sm leading-6 text-white/60">{persona?.summary ?? demoPersona.summary}</p><p className="mt-4 text-xs leading-5 text-violet-100/70">Built from the preferences you chose to share.</p><div className="mt-7"><Eyebrow>Conversation style</Eyebrow><p className="mt-2 text-sm leading-6 text-white/65">{persona?.conversationStyle ?? demoPersona.conversationStyle}</p></div><div className="mt-7 flex flex-wrap gap-2">{[...(persona?.interests ?? demoPersona.interests), ...(persona?.values ?? demoPersona.values), ...(persona?.preferredDateStyles ?? demoPersona.preferredDateStyles)].slice(0, 5).map((item) => <span key={item} className="rounded-full bg-white/10 px-3 py-2 text-xs text-white/75">{item}</span>)}</div><div className="mt-10 border-t border-white/10 pt-5 text-xs leading-5 text-white/45">A reflection of what you shared—not a replacement for you.</div></div></section>}
     {stage === "match" && <section className="relative mx-auto max-w-4xl px-6 py-12 sm:py-20"><VirtualDateMatchCard onStartDate={() => { setVisibleMessages(0); setStage("date"); }} /></section>}
-    {stage === "date" && <section className="relative mx-auto flex min-h-[calc(100vh-88px)] max-w-3xl flex-col px-6 pb-12"><div className="pt-8 text-center"><Eyebrow>The Veil room</Eyebrow><h2 className="mt-3 font-serif text-4xl">A first conversation, gently held.</h2><p className="mt-3 text-xs text-white/45">AI-generated simulation based on user-provided profiles.</p></div><div className="my-8 flex flex-1 flex-col justify-end gap-4">{dateMessages.slice(0, visibleMessages).map(([name, text], i) => <div key={text} className={`flex animate-[fadeIn_.45s_ease-out] ${i % 2 ? "justify-end" : "justify-start"}`}><div className={`max-w-[82%] rounded-2xl p-4 text-sm leading-6 ${i % 2 ? "rounded-br-sm bg-violet-300 text-[#210d35]" : "rounded-bl-sm bg-white/10 text-white/80"}`}><p className={`mb-1 text-[10px] font-bold uppercase tracking-wider ${i % 2 ? "text-[#4f2671]" : "text-violet-200/70"}`}>{name}</p>{text}</div></div>)}</div>{visibleMessages >= dateMessages.length && <div role="status" className="rounded-2xl border border-emerald-300/25 bg-emerald-300/10 p-5 text-center animate-[fadeIn_.45s_ease-out]"><p className="text-sm font-semibold text-emerald-100">✦ Virtual Date Report ready</p><h3 className="mt-2 font-serif text-2xl">Your Veils are back.</h3><p className="mt-2 text-sm text-white/55">They found a few threads worth holding onto.</p><div className="mt-5"><Button onClick={() => setStage("report")}>View Virtual Date Report <span className="ml-2">→</span></Button></div></div>}</section>}
+   {stage === "date" && (
+  <section className="relative mx-auto flex min-h-[calc(100vh-88px)] max-w-5xl flex-col px-6 pb-12">
+    <div className="pt-8 text-center">
+      <Eyebrow>The Veil room</Eyebrow>
+
+      <h2 className="mt-3 font-serif text-4xl">
+        A first conversation, gently held.
+      </h2>
+
+      <p className="mt-3 text-xs text-white/45">
+        AI-generated simulation based on user-provided profiles.
+      </p>
+    </div>
+
+    <div className="relative mt-8 overflow-hidden rounded-[2rem] border border-white/10 shadow-2xl">
+      {/* Realistic coffee shop scene */}
+      <img
+        src="/avatars/coffee-date.png"
+        alt="Rohan and Anaya on a virtual coffee date"
+        className="h-[560px] w-full object-cover"
+      />
+
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/10" />
+
+      {/* Current message only */}
+      {visibleMessages > 0 && (
+        <div className="absolute inset-0">
+          {(() => {
+            const [name, text] =
+              dateMessages[
+                Math.min(
+                  visibleMessages - 1,
+                  dateMessages.length - 1
+                )
+              ];
+
+            const isRohan =
+              name.toLowerCase().includes("your");
+
+            return (
+              <div
+                className={`absolute top-[28%] max-w-[320px] animate-[fadeIn_.45s_ease-out] rounded-3xl border p-5 shadow-2xl backdrop-blur-md ${
+                  isRohan
+                    ? "left-[29%] border-violet-200/20 bg-violet-300/90 text-[#210d35]"
+                    : "right-[29%] border-white/10 bg-[#211a25]/95 text-white"
+                }`}
+              >
+                <p
+                  className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
+                    isRohan
+                      ? "text-[#5d347b]"
+                      : "text-fuchsia-200"
+                  }`}
+                >
+                  {isRohan ? "Your Veil" : "Anaya"}
+                </p>
+
+                <p className="mt-2 text-sm leading-6">
+                  {text}
+                </p>
+              </div>
+            );
+          })()}
+        </div>
+      )}
+
+      {/* Date progress */}
+      {visibleMessages < dateMessages.length && (
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+          <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/55 px-4 py-2 text-xs text-white/75 backdrop-blur-md">
+            <span className="size-2 animate-pulse rounded-full bg-violet-300" />
+            Virtual date in progress...
+          </div>
+        </div>
+      )}
+    </div>
+
+    {visibleMessages >= dateMessages.length && (
+      <div
+        role="status"
+        className="mt-6 rounded-2xl border border-emerald-300/25 bg-emerald-300/10 p-5 text-center animate-[fadeIn_.45s_ease-out]"
+      >
+        <p className="text-sm font-semibold text-emerald-100">
+          ✦ Virtual Date Report ready
+        </p>
+
+        <h3 className="mt-2 font-serif text-2xl">
+          Your Veils are back.
+        </h3>
+
+        <p className="mt-2 text-sm text-white/55">
+          They found a few threads worth holding onto.
+        </p>
+
+        <div className="mt-5">
+          <Button onClick={() => setStage("report")}>
+            View Virtual Date Report <span className="ml-2">→</span>
+          </Button>
+        </div>
+      </div>
+    )}
+  </section>
+)}
     {stage === "report" && <section className="relative mx-auto max-w-5xl px-6 py-10 sm:py-16"><div className="text-center"><Eyebrow>Compatibility exploration</Eyebrow><h2 className="mt-3 font-serif text-5xl">Worth <em className="font-normal text-violet-300">Exploring.</em></h2><p className="mt-4 text-white/55">Not a verdict. A few inviting places to begin.</p></div><div className="mx-auto mt-8 max-w-xl rounded-[2rem] border border-violet-200/20 bg-gradient-to-br from-violet-300/15 to-fuchsia-300/5 p-6 text-center"><Eyebrow>Requirement Match Signal</Eyebrow><p className="mt-3 font-serif text-6xl text-violet-100">{requirementSignal}%</p><p className="mx-auto mt-4 max-w-md text-sm leading-6 text-white/65">Based on the relationship goals, values, lifestyle, interests, and first-date preferences you stated, this is a promising connection worth exploring.</p><p className="mx-auto mt-4 max-w-md text-xs leading-5 text-white/42">This is an explainable preference-based match signal calculated from your stated relationship goals, values, interests, lifestyle, communication style, and date preferences. It is not a scientific compatibility score and does not predict real-world chemistry or relationship success.</p></div><div className="mx-auto mt-6 grid max-w-3xl gap-3 sm:grid-cols-2 md:grid-cols-3">
   {[
     ["Relationship goals", matchResult.breakdown.relationshipGoals],
